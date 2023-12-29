@@ -1,12 +1,26 @@
 
+import React, { useEffect } from 'react'
+import {fetchDataFromApi}  from './utils/service'
 
+const App = () => {
 
-function App() {
+  useEffect(() => {
+      
+    getPopular()
+  }, [])
+
+  const getPopular = () => {
+     fetchDataFromApi("/movie/popular")
+      .then((res) => {
+        console.log(res.results)
+      })
+  }
+
   return (
-    <div className="App">
-      <span style={{color:"white"}} >Hello World</span>
-    </div>
-  );
+    <div style={{backgroundColor:"white"}}>  
+    Lorem
+     </div>
+  )
 }
 
-export default App;
+export default App
