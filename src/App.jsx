@@ -1,32 +1,27 @@
 
 import React, { useEffect, useState } from 'react'
 import {fetchDataFromApi}  from './utils/service'
+import { useDispatch } from 'react-redux'
+import { getApiConfiguration } from './redux/homeSlice'
+
 
 const App = () => {
-  const [movieArr, setMovieArr] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    
     getPopular()
   }, [])
 
   const getPopular = () => {
      fetchDataFromApi("/movie/popular")
       .then((res) => {
-        console.log(res.results)
-        setMovieArr(res.results)
+        console.log(res)
+        dispatch(getApiConfiguration(res))
       })
   }
 
   return (
     <div style={{backgroundColor:"white"}}>  
-      { movieArr &&
-
-        movieArr.map( (item,i ) => (
-          <div key={i}>{item.original_title}</div>
-        ))
-
-      }
      </div>
   )
 }
