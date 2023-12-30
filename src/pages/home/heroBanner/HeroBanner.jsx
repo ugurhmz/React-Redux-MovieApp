@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const HeroBanner = () => {
 
   const [background, setBackground] = useState("")
   const [query, setQuery] = useState("")
+  const navigate = useNavigate()
 
   const searchQueryhandle = (e) => {
     if(e.key === "Enter" && query.length > 0){
-        console.log(e.target.value)
+        navigate(`/search/${query}`)
     }
   }
 
