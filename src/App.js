@@ -1,11 +1,12 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {fetchDataFromApi}  from './utils/service'
 
 const App = () => {
+  const [movieArr, setMovieArr] = useState([])
 
   useEffect(() => {
-      
+    
     getPopular()
   }, [])
 
@@ -13,12 +14,19 @@ const App = () => {
      fetchDataFromApi("/movie/popular")
       .then((res) => {
         console.log(res.results)
+        setMovieArr(res.results)
       })
   }
 
   return (
     <div style={{backgroundColor:"white"}}>  
-    Lorem
+      { movieArr &&
+
+        movieArr.map( (item,i ) => (
+          <div key={i}>{item.original_title}</div>
+        ))
+
+      }
      </div>
   )
 }
