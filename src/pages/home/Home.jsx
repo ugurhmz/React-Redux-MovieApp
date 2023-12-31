@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className='homePage'>
         <HeroBanner />
-        <div style={{height: '1000px'}}></div>
+        <div style={{height: '500px'}}></div>
     </div>
   )
 }
