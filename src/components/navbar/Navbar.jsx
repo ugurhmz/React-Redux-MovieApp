@@ -32,6 +32,18 @@ const Navbar = () => {
                 <HiOutlineSearch/>
             </li>
           </ul>
+
+          <div className="mobileMenuItems">
+              <HiOutlineSearch/>
+              {
+                mobileMenu ? (
+                  <VscChromeClose/> 
+                ) : (
+                  <SlMenu/>)
+              }
+
+          </div>
+
       </ContentWrapper>
     </header>
   )
