@@ -17,9 +17,21 @@ const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const openSearch = () => {
+    setMobileMenu(false)
+    setShowSearch(true)
+  }
+
+  const openMobileMenu = () =>  {
+      setMobileMenu(true)
+      setShowSearch(false)
+  }
+
+
+
 
   return (
-    <header className='header'>
+    <header className={`header ${mobileMenu ? "mobileView" :""} ${show}`}>
       <ContentWrapper>
           <div className="logo">
             <img  src={logo} alt="" />
@@ -37,9 +49,9 @@ const Navbar = () => {
               <HiOutlineSearch/>
               {
                 mobileMenu ? (
-                  <VscChromeClose/> 
+                  <VscChromeClose onClick={ () => setMobileMenu(false)}/> 
                 ) : (
-                  <SlMenu/>)
+                  <SlMenu onClick={openMobileMenu}/>)
               }
 
           </div>
