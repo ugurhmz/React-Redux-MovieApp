@@ -12,7 +12,7 @@ import PageNotFound from './pages/404/PageNotFound.jsx'
 import Explore from './pages/explore/Explore.jsx'
 import SearchResult from './pages/searchResult/SearchResult.jsx'
 import Footer from './components/footer/Footer'
-import Header from './components/header/Header'
+import NavBar from './components/navbar/Navbar.jsx'
 
 
 
@@ -44,6 +44,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+    <NavBar />
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/:mediaType/:id' element={<Details />} />
@@ -51,6 +52,7 @@ const App = () => {
         <Route path='/explore/:mediaType' element={<Explore/>} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
+
     </BrowserRouter>
   )
 }
