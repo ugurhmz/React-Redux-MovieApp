@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
@@ -13,9 +13,14 @@ import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
 const Carousel = ({data, loading}) => {
-    const carouselContainer = useRef()
+    const carouselContainer = useRef(0);
     const { payloadObject } = useSelector( state => state.home)
     const navigate = useNavigate()
+
+   
+    useEffect(() => {
+        console.log("DEBGGcarouselContainer", carouselContainer.current); // Debug amaçlı
+    }, []);
 
     const skItem = () => {
         return (
@@ -28,23 +33,36 @@ const Carousel = ({data, loading}) => {
             </div>
         )
     }
-
-    const navigationHandle = (type) => {}
+    const navigationHandle = (type) => {
+        const container = carouselContainer.current;
+        if (container) {
+            const scrollAmount = 
+            type === "left"
+                    ? container.scrollLeft - (container.offsetWidth + 20)
+                    : container.scrollLeft + (container.offsetWidth + 20);
+    
+            container.scrollTo({
+                left: scrollAmount,
+                behavior: "smooth",
+            });
+        }
+    }
+    
 
   return (
     <div className="carousel">
         <ContentWrapper>
             <BsFillArrowLeftCircleFill 
                 className="carouselLeftNav arrow"
-                onClick={navigationHandle("left")}
+                onClick={() => navigationHandle("left")}
             />
             <BsFillArrowRightCircleFill 
                 className="carouselRighttNav arrow"
-                onClick={navigationHandle("right")}
+                onClick={() => navigationHandle("right")}
             />
 
             { !loading ? (
-                <div className="carouselItems">
+                <div className="carouselItems" ref={carouselContainer}>
                     {
                         data?.map( (item) => {
                             const posterURL = item.poster_path ? payloadObject.poster + item.poster_path : ""
@@ -74,8 +92,7 @@ const Carousel = ({data, loading}) => {
                 </div>
 
             ) : 
-            
-            
+              
             (
                 <div className="loadingSkeleton">
                     {skItem()}
