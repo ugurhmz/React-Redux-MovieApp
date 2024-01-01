@@ -9,18 +9,26 @@ import dayjs from "dayjs"
 import './style.scss'
 import ContentWrapper from "../contentwrapper/ContentWrapper";
 import Img from "../lazyLoadImage/Img"
+import CircleRating from "../circleRating/CircleRating";
 
 const Carousel = ({data, loading}) => {
     const carouselContainer = useRef()
     const { payloadObject } = useSelector( state => state.home)
     const navigate = useNavigate()
 
-    console.log("payloadObject",payloadObject)
-    console.log("data",data)
-
-    const navigationHandle = (type) => {
-
+    const skItem = () => {
+        return (
+            <div className="skeletonItem">
+                    <div className="posterBlock skeleton"></div>
+                    <div className="textBlock">
+                        <div className="title skeleton"></div>
+                        <div className="data skeleton"></div>
+                    </div>
+            </div>
+        )
     }
+
+    const navigationHandle = (type) => {}
 
   return (
     <div className="carousel">
@@ -43,7 +51,20 @@ const Carousel = ({data, loading}) => {
                                 <div key={item.id} className="carouselItem">
                                     <div className="posterBlock">
                                         <Img src={posterURL}/>
+                                        <CircleRating rating={item.vote_average.toFixed(1)}/>
                                     </div>
+                                    <div className="textBlock">
+                                        <span className="title">
+                                            { item.title || item.name}
+                                        </span>
+                                        <span className="date">
+                                            { 
+                                                dayjs(item.release_Date).format("MMM D, YYYY")
+                                            }
+                                        </span>
+                                    </div>
+
+
                                 </div>
                             )
                         })
@@ -53,9 +74,15 @@ const Carousel = ({data, loading}) => {
             ) : 
             
             
-            (<span>
-                Loading . . .
-            </span>)
+            (
+                <div className="loadingSkeleton">
+                    {skItem()}
+                    {skItem()}
+                    {skItem()}
+                    {skItem()}
+                    {skItem()}
+                </div>
+            )
             
             }
 
