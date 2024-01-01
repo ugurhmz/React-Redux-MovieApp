@@ -1,11 +1,9 @@
-
 import React, { useEffect, useState } from 'react'
 import {fetchDataFromApi}  from './utils/service'
 import { useDispatch, useSelector } from 'react-redux'
-import { getApiConfiguration } from './redux/homeSlice'
+import { getApiConfiguration, getGenres } from './redux/homeSlice'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-//
 import Home from './pages/home/Home.jsx'
 import Details from './pages/details/Details.jsx'
 import PageNotFound from './pages/404/PageNotFound.jsx'
@@ -14,32 +12,43 @@ import SearchResult from './pages/searchResult/SearchResult.jsx'
 import Footer from './components/footer/Footer'
 import NavBar from './components/navbar/Navbar.jsx'
 
-
-
 const App = () => {
   const dispatch = useDispatch()
-  const {payloadObject} = useSelector(state => state.home)
- 
-  console.log("xxx",payloadObject)
 
   useEffect(() => {
-    getPopular()
+    fetchGenres()
+    fetchConfigs()
   }, [])
 
-  const getPopular = () => {
+  // FETCH Config
+  const fetchConfigs = () => {
      fetchDataFromApi("/configuration")
       .then((res) => {
-
-        console.log("cfg", res)
-
         const  url = {
           backdrop:res.images.secure_base_url + "original",
           poster:res.images.secure_base_url + "original",
           profile:res.images.secure_base_url + "original",
         }
-
         dispatch(getApiConfiguration(url))
       })
+  }
+
+  // FETCH Genres
+  const fetchGenres = async () => {
+    let promises = []
+    let endPoints = ["tv","movie"]
+    let allGenres = {}
+
+    endPoints.forEach(( url ) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`))
+    })
+
+    const data = await Promise.all(promises)
+        data.map( ({genres}) => {
+          return genres.map( (item) => (allGenres[item.id]) = item)
+        })
+
+       dispatch(getGenres(allGenres))
   }
 
   return (
