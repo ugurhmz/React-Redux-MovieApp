@@ -10,6 +10,7 @@ import './style.scss'
 import ContentWrapper from "../contentwrapper/ContentWrapper";
 import Img from "../lazyLoadImage/Img"
 import CircleRating from "../circleRating/CircleRating";
+import Genres from "../genres/Genres";
 
 const Carousel = ({data, loading}) => {
     const carouselContainer = useRef()
@@ -52,6 +53,7 @@ const Carousel = ({data, loading}) => {
                                     <div className="posterBlock">
                                         <Img src={posterURL}/>
                                         <CircleRating rating={item.vote_average.toFixed(1)}/>
+                                        <Genres data={item.genre_ids.slice(0,2)} />
                                     </div>
                                     <div className="textBlock">
                                         <span className="title">

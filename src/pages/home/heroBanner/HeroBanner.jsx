@@ -14,7 +14,7 @@ const HeroBanner = () => {
   const {payloadObject} = useSelector( (state) => state.home )
 
   const { data, loading } = useFetch("/movie/upcoming")
-  console.log("Banner data", data)
+  //console.log("Banner data", data)
 
   useEffect ( () => {
       const bg = payloadObject.backdrop+data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path
