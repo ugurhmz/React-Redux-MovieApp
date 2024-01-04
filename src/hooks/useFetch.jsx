@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { fetchDataFromApi } from '../utils/service'
-
 const useFetch = (url) => {
     
     const [data, setData] = useState(null)

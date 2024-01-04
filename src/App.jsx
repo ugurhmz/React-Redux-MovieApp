@@ -16,6 +16,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log("App.jsx useEffect")
     fetchGenres()
     fetchConfigs()
   }, [])

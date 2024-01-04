@@ -12,7 +12,7 @@ import Img from "../lazyLoadImage/Img"
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({data, loading}) => {
+const Carousel = ({ data, loading , endPoint}) => {
     const carouselContainer = useRef(0);
     const { payloadObject } = useSelector( state => state.home)
     const navigate = useNavigate()
@@ -33,7 +33,7 @@ const Carousel = ({data, loading}) => {
             </div>
         )
     }
-    const navigationHandle = (type) => {
+    const scrollingButton = (type) => {
         const container = carouselContainer.current;
         if (container) {
             const scrollAmount = 
@@ -48,17 +48,16 @@ const Carousel = ({data, loading}) => {
         }
     }
     
-
   return (
     <div className="carousel">
         <ContentWrapper>
             <BsFillArrowLeftCircleFill 
                 className="carouselLeftNav arrow"
-                onClick={() => navigationHandle("left")}
+                onClick={() => scrollingButton("left")}
             />
             <BsFillArrowRightCircleFill 
                 className="carouselRighttNav arrow"
-                onClick={() => navigationHandle("right")}
+                onClick={() => scrollingButton("right")}
             />
 
             { !loading ? (
@@ -67,7 +66,10 @@ const Carousel = ({data, loading}) => {
                         data?.map( (item) => {
                             const posterURL = item.poster_path ? payloadObject.poster + item.poster_path : ""
                             return (
-                                <div key={item.id} className="carouselItem">
+                                <div key={item.id} 
+                                className="carouselItem" 
+                                onClick={ () => navigate(`/${item.media_type || endPoint}/${item.id}`)}
+                                >
                                     <div className="posterBlock">
                                         <Img src={posterURL}/>
                                         <CircleRating rating={item.vote_average.toFixed(1)}/>
@@ -83,8 +85,6 @@ const Carousel = ({data, loading}) => {
                                             }
                                         </span>
                                     </div>
-
-
                                 </div>
                             )
                         })
@@ -102,7 +102,6 @@ const Carousel = ({data, loading}) => {
                     {skItem()}
                 </div>
             )
-            
             }
 
         </ContentWrapper>
