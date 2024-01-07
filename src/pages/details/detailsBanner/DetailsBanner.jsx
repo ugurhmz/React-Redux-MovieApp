@@ -6,12 +6,15 @@ import useFetch from '../../../hooks/useFetch'
 import { useSelector } from 'react-redux'
 import Img from '../../../components/lazyLoadImage/Img'
 import './style.scss'
+import dayjs from "dayjs"
+import Genres from '../../../components/genres/Genres'
 
 const DetailsBanner = ({ video, crew }) => {
 
     const { mediaType, id } = useParams()
     const {data, loading } = useFetch(`/${mediaType}/${id}`)
     const { payloadObject } = useSelector( (state) => state.home)
+    const _genres = data?.genres?.map( (item) => item.id)
 
     console.log("payloadObject", payloadObject)
     console.log("Banner data", data)
@@ -29,8 +32,31 @@ const DetailsBanner = ({ video, crew }) => {
                 <React.Fragment>
                     <div className="backdrop-img">
                         <Img src={payloadObject.backdrop + data.backdrop_path} />
-                        <div className='opacity-layer'></div>
+                        
                     </div>
+                    <div className='opacity-layer'></div>
+                    <ContentWrapper>
+                        <div className="content">
+                            <div className="left">
+                                { data.poster_path ? (
+                                    <Img className="posterImg" src={payloadObject.backdrop + data.poster_path } />
+                                ) : (
+                                    <Img className="posterImg" src="" /> )
+                                }
+                            </div>
+
+                            <div className="right">
+                                <div className="title">
+                                    {`${data.name || data.title} (${dayjs(data?.release_date).format("YYYY")})`}
+                                </div>
+                                <div className="subtitle">
+                                    { data.tagline }
+                                </div>
+
+                                <Genres data={_genres}/>
+                            </div>
+                        </div>
+                    </ContentWrapper>
                 </React.Fragment>
             )
             }
