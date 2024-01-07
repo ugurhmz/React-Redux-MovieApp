@@ -78,6 +78,45 @@ const DetailsBanner = ({ video, crew }) => {
                                     </div>
                                 </div>
 
+                                <div className="info">
+                                    { data.status &&
+                                        <div className="infoItem">
+                                            <span className="text bold">
+                                                Status: {" "}
+                                            </span>
+
+                                            <span className="text">
+                                                { data.status }
+                                            </span>
+                                        </div>
+                                    }
+
+                                    {
+                                        data.release_date && 
+                                        <div className="infoItem">
+                                            <span className="text bold">
+                                                Release Date: {" "}
+                                            </span>
+                                            <span className="text">
+                                                {dayjs(data.release_date).format("MMM D, YYYY")}
+                                            </span>
+                                        </div>
+                                    }
+
+                                    { 
+                                        data.runtime &&
+                                        <div className="infoItem">
+                                            <span className="text bold">
+                                                Runtime: {" "}
+                                            </span>
+                                            <span className="text">
+                                                {
+                                                    toHoursAndMinutes(data.runtime)
+                                                }
+                                            </span>
+                                        </div>        
+                                    }
+                                </div>
                             </div>
                         </div>
                     </ContentWrapper>
