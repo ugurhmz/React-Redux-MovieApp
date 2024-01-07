@@ -8,6 +8,9 @@ import Img from '../../../components/lazyLoadImage/Img'
 import './style.scss'
 import dayjs from "dayjs"
 import Genres from '../../../components/genres/Genres'
+import CircleRating from '../../../components/circleRating/CircleRating'
+import PlayIcon from '../PlayBtn'
+
 
 const DetailsBanner = ({ video, crew }) => {
 
@@ -54,6 +57,27 @@ const DetailsBanner = ({ video, crew }) => {
                                 </div>
 
                                 <Genres data={_genres}/>
+
+                                <div className="row">
+                                    <CircleRating rating={data.vote_average.toFixed(1)}  />
+                                    <div className="playbtn" >
+                                        <PlayIcon />
+                                        <span className='text'>
+                                            Watch trailer
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div className="overview">
+                                    <div className="heading">
+                                        Overview
+                                    </div>
+
+                                    <div className="description">
+                                        { data?.overview}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </ContentWrapper>
