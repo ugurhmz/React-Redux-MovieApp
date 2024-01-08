@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import VideoPopup from '../../components/videoPopup/VideoPopup'
-import ContentWrapper from '../../components/contentwrapper/ContentWrapper'
+import VideoPopup from '../../../components/videoPopup/VideoPopup'
+import ContentWrapper from '../../../components/contentwrapper/ContentWrapper'
 import './style.scss'
-import Img from '../../components/lazyLoadImage/Img'
-import PlayIcon from '../details/PlayBtn'
+import Img from '../../../components/lazyLoadImage/Img'
+import PlayIcon from '../PlayBtn'
 
 const VideosSection = ({ data, loading }) => {
     const [ show, setShow] = useState(false)

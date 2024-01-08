@@ -1,8 +1,8 @@
 import React from 'react'
-import ContentWrapper from '../../components/contentwrapper/ContentWrapper'
+import ContentWrapper from '../../../components/contentwrapper/ContentWrapper'
 import { useSelector } from 'react-redux';
 import './style.scss'
-import Img from '../../components/lazyLoadImage/Img';
+import Img from '../../../components/lazyLoadImage/Img';
 
 const Cast = ({data, loading}) => {
 
