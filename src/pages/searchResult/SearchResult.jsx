@@ -4,6 +4,8 @@ import { fetchDataFromApi } from '../../utils/service'
 import Spinner from '../../components/spinner/Spinner'
 import ContentWrapper from '../../components/contentwrapper/ContentWrapper'
 import './style.scss'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import MovieCard from '../../components/movieCard/MovieCard'
 
 const SearchResult = () => {
 
@@ -27,8 +29,7 @@ const SearchResult = () => {
   const fetchNextPageData = () => {
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`)
       .then( (res) => {
-        if(data.results){
-          console.log("...data",...data)
+        if(data?.results){
           setData({
             ...data,
             results:[...data?.results, ...res.results]
@@ -42,6 +43,7 @@ const SearchResult = () => {
   }
 
   useEffect( () => {
+    setPageNum(1)
     fetchInitialData()
   }, [query])
 
@@ -58,6 +60,23 @@ const SearchResult = () => {
                 { `Search ${data?.total_results > 1   ? "results" : "result"} of '${query}'`}
 
               </div>
+
+              <InfiniteScroll
+                className='content'
+                dataLength={data?.results?.length || []}
+                next={fetchNextPageData}
+                hasMore={pageNum <= data?.total_pages}
+                loader={<Spinner />}
+              >
+                  { data?.results.map((item, i) => {
+                    if(item.media_type === "person" ) return;
+                    return(
+                      <MovieCard key={i} data={item} fromSearch={true}/>
+                    )
+                  })
+
+                  }
+              </InfiniteScroll>
             </>
           ) : (
             <span className="resultNotFound">

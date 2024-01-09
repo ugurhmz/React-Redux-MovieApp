@@ -9,10 +9,10 @@ import CircleRating from "../circleRating/CircleRating"
 import Genres from "../genres/Genres"
 
 const MovieCard = ({ data, fromSearch, mediaType }) => {
-    const { url } = useSelector((state) => state.home);
+    const { payloadObject } = useSelector((state) => state.home);
     const navigate = useNavigate();
     const posterUrl = data.poster_path
-        ? url.poster + data.poster_path
+        ? payloadObject.poster + data.poster_path
         : "";
     return (
         <div
