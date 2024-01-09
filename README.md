@@ -23,15 +23,15 @@
 
 _______
 
-![Alt text](<Ekran Resmi 2024-01-09 12.30.29.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.30.29.png>)
 
-![Alt text](<Ekran Resmi 2024-01-09 12.31.20.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.31.20.png>)
 
-![Alt text](<Ekran Resmi 2024-01-09 12.33.25.png>)
-![Alt text](<Ekran Resmi 2024-01-09 12.33.50.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.33.25.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.33.50.png>)
 
-![Alt text](<Ekran Resmi 2024-01-09 12.31.51.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.31.51.png>)
 
-![Alt text](<Ekran Resmi 2024-01-09 12.32.25.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.32.25.png>)
 
-![Alt text](<Ekran Resmi 2024-01-09 12.33.03.png>)
+![Alt text](<readmeImgs/Ekran Resmi 2024-01-09 12.33.03.png>)
